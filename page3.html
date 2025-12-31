@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#ffecd2">
+    <title>💌 A Letter To You 💖</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Edu AU VIC WA NT Hand', cursive;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
+            background-size: 200% 200%;
+            animation: gradientFlow 10s ease infinite;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            body {
+                background-attachment: scroll;
+            }
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .letter-container {
+            max-width: 800px;
+            background: linear-gradient(to bottom, #fff8e7, #fffaf0);
+            padding: 60px;
+            border-radius: 15px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3), 
+                        0 0 0 1px rgba(255, 215, 0, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            position: relative;
+            animation: unfold 1.5s ease-out;
+            border: 2px solid rgba(231, 76, 60, 0.1);
+            z-index: 10;
+        }
+
+        @keyframes unfold {
+            0% {
+                transform: scaleY(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scaleY(0.5);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scaleY(1);
+                opacity: 1;
+            }
+        }
+
+        .letter-container::before {
+            content: '📝';
+            position: absolute;
+            top: -30px;
+            right: 30px;
+            font-size: 3em;
+        }
+
+        .stamp {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            border: 3px dashed #e74c3c;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            transform: rotate(15deg);
+            background: rgba(255, 255, 255, 0.5);
+            animation: stampBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes stampBounce {
+            0%, 100% { transform: rotate(15deg) scale(1); }
+            50% { transform: rotate(12deg) scale(1.1); }
+        }
+
+        .date {
+            text-align: right;
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            font-style: italic;
+            font-family: 'Edu AU VIC WA NT Hand', cursive;
+        }
+
+        h1 {
+            text-align: center;
+            color: #e74c3c;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-family: 'Georgia', serif;
+            text-shadow: 2px 2px 4px rgba(231, 76, 60, 0.3);
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        h1 .emoji {
+            background: none;
+            -webkit-background-clip: initial;
+            -webkit-text-fill-color: initial;
+            background-clip: initial;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(231, 76, 60, 0.3)); }
+            50% { filter: drop-shadow(0 0 15px rgba(231, 76, 60, 0.6)); }
+        }
+
+        .letter-content {
+            color: #2c3e50;
+            font-size: 1.3em;
+            line-height: 2.2;
+            text-align: justify;
+            animation: fadeInText 2s ease-in;
+            position: relative;
+            font-family: 'Edu AU VIC WA NT Hand', cursive;
+        }
+
+        .letter-content p {
+            margin-bottom: 25px;
+            text-indent: 40px;
+        }
+
+        .signature {
+            text-align: right;
+            font-size: 2em;
+            margin-top: 40px;
+            font-family: 'Edu AU VIC WA NT Hand', cursive;
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .heart-decoration {
+            text-align: center;
+            font-size: 2em;
+            margin: 30px 0;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .floating-hearts {
+            position: fixed;
+            bottom: -50px;
+            font-size: 2em;
+            opacity: 0;
+            animation: floatUp 12s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #fff, transparent);
+            border-radius: 50%;
+            animation: sparkleEffect 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkleEffect {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .rose-petals {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            border-radius: 50% 0;
+            opacity: 0.7;
+            animation: petalFall 12s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes petalFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #e74c3c, #ff6b9d);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+            border: 2px solid transparent;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 44px;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            transform: scale(1.08) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.6);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .envelope-effect {
+            animation: envelopeOpen 1s ease-out;
+        }
+
+        @keyframes envelopeOpen {
+            0% { transform: scaleY(0) rotateX(90deg); }
+            60% { transform: scaleY(1) rotateX(-10deg); }
+            100% { transform: scaleY(1) rotateX(0deg); }
+        }
+
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .letter-container { padding: 40px 30px; }
+            h1 { font-size: 2em; }
+            .letter-content { font-size: 1em; line-height: 1.8; }
+            .signature { font-size: 1.5em; }
+            .stamp { width: 60px; height: 60px; font-size: 1.5em; }
+        }
+
+        @media (max-width: 480px) {
+            .letter-container { padding: 30px 20px; }
+            h1 { font-size: 1.8em; }
+            .letter-content { font-size: 0.95em; }
+            .letter-content p { text-indent: 20px; margin-bottom: 20px; }
+            .nav-btn { padding: 10px 25px; font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts -->
+    <div class="floating-hearts" style="left: 10%; animation-delay: 0s;">💖</div>
+    <div class="floating-hearts" style="left: 20%; animation-delay: 2s;">💕</div>
+    <div class="floating-hearts" style="left: 80%; animation-delay: 1s;">❤️</div>
+    <div class="floating-hearts" style="left: 90%; animation-delay: 3s;">💗</div>
+    <div class="floating-hearts" style="left: 50%; animation-delay: 4s;">💓</div>
+    <div class="floating-hearts" style="left: 70%; animation-delay: 1.5s;">💞</div>
+    <div class="floating-hearts" style="left: 30%; animation-delay: 3.5s;">💝</div>
+    <div class="floating-hearts" style="left: 5%; animation-delay: 5s;">💗</div>
+    <div class="floating-hearts" style="left: 15%; animation-delay: 6.5s;">💕</div>
+    <div class="floating-hearts" style="left: 25%; animation-delay: 1.8s;">❤️</div>
+    <div class="floating-hearts" style="left: 35%; animation-delay: 4.2s;">💖</div>
+    <div class="floating-hearts" style="left: 40%; animation-delay: 2.5s;">💝</div>
+    <div class="floating-hearts" style="left: 45%; animation-delay: 5.5s;">💞</div>
+    <div class="floating-hearts" style="left: 55%; animation-delay: 3.2s;">💓</div>
+    <div class="floating-hearts" style="left: 60%; animation-delay: 6.8s;">💗</div>
+    <div class="floating-hearts" style="left: 65%; animation-delay: 2.2s;">💕</div>
+    <div class="floating-hearts" style="left: 75%; animation-delay: 4.8s;">❤️</div>
+    <div class="floating-hearts" style="left: 85%; animation-delay: 1.3s;">💖</div>
+    <div class="floating-hearts" style="left: 95%; animation-delay: 5.8s;">💝</div>
+    <div class="floating-hearts" style="left: 8%; animation-delay: 7s;">💞</div>
+    <div class="floating-hearts" style="left: 18%; animation-delay: 3.8s;">💓</div>
+    <div class="floating-hearts" style="left: 28%; animation-delay: 6.2s;">💗</div>
+    <div class="floating-hearts" style="left: 38%; animation-delay: 2.8s;">💕</div>
+    <div class="floating-hearts" style="left: 48%; animation-delay: 7.5s;">❤️</div>
+    <div class="floating-hearts" style="left: 58%; animation-delay: 4.5s;">💖</div>
+    <div class="floating-hearts" style="left: 68%; animation-delay: 1.2s;">💝</div>
+    <div class="floating-hearts" style="left: 78%; animation-delay: 5.2s;">💞</div>
+    <div class="floating-hearts" style="left: 88%; animation-delay: 3.6s;">💓</div>
+    <div class="floating-hearts" style="left: 92%; animation-delay: 6.5s;">💗</div>
+    <div class="floating-hearts" style="left: 12%; animation-delay: 2.1s;">💕</div>
+    <div class="floating-hearts" style="left: 22%; animation-delay: 7.2s;">❤️</div>
+    <div class="floating-hearts" style="left: 32%; animation-delay: 4.1s;">💖</div>
+    <div class="floating-hearts" style="left: 42%; animation-delay: 1.6s;">💝</div>
+    <div class="floating-hearts" style="left: 52%; animation-delay: 5.9s;">💞</div>
+    <div class="floating-hearts" style="left: 62%; animation-delay: 3.3s;">💓</div>
+    <div class="floating-hearts" style="left: 72%; animation-delay: 6.9s;">💗</div>
+    <div class="floating-hearts" style="left: 82%; animation-delay: 2.6s;">💕</div>
+    <div class="floating-hearts" style="left: 87%; animation-delay: 7.8s;">❤️</div>
+    <div class="floating-hearts" style="left: 3%; animation-delay: 4.6s;">💖</div>
+    <div class="floating-hearts" style="left: 97%; animation-delay: 1.9s;">💝</div>
+    
+    <!-- Rose Petals -->
+    <div class="rose-petals" style="left: 15%; animation-delay: 0s;"></div>
+    <div class="rose-petals" style="left: 35%; animation-delay: 3s;"></div>
+    <div class="rose-petals" style="left: 55%; animation-delay: 6s;"></div>
+    <div class="rose-petals" style="left: 75%; animation-delay: 2s;"></div>
+    <div class="rose-petals" style="left: 85%; animation-delay: 5s;"></div>
+    <div class="rose-petals" style="left: 45%; animation-delay: 4s;"></div>
+    
+    <!-- Sparkles -->
+    <div class="sparkle" style="top: 20%; left: 15%; animation-delay: 0.5s;"></div>
+    <div class="sparkle" style="top: 40%; right: 10%; animation-delay: 1.2s;"></div>
+    <div class="sparkle" style="bottom: 30%; left: 25%; animation-delay: 2s;"></div>
+    <div class="sparkle" style="top: 60%; right: 20%; animation-delay: 0.8s;"></div>
+    <div class="sparkle" style="bottom: 15%; right: 30%; animation-delay: 1.8s;"></div>
+    <div class="sparkle" style="top: 80%; left: 40%; animation-delay: 2.5s;"></div>
+
+    <div class="letter-container envelope-effect">
+        <div class="stamp">💌</div>
+        <div class="date">December 31, 2025</div>
+        
+        <h1> To My Nidhuuu <span class="emoji">👀</span></h1>
+        
+        <div class="heart-decoration">💝 ❤️ 💕 💖 ❤️ 💝</div>
+        
+        <div class="letter-content">
+            <p>
+                As I sit here thinking about everything we've been through together, my heart fills with so much love and gratitude. You are not just my partner, but my best friend, my confidant, and greatest gift I ever Received.
+            </p>
+            
+            <p>
+                Every day with you is a gift. Your laughter brightens my darkest days, your support helps me in my confusion, and your love gives me strength I never knew I had. You've taught me what it means to be truely loved and love truely.
+            </p>
+            
+            <p>
+                As we welcome 2026 together, I want you to know that my love for you grows stronger with each passing moment. I'm excited for all the memories we'll create, the challenges we'll overcome, and the dreams we'll achieve together.
+            </p>
+            
+            <p>
+                Thank you for being you. Thank you for choosing me. Thank you for this beautiful journey we call "us."
+            </p>
+        </div>
+        
+        <div class="signature">
+            Forever Yours Ayuuu 💕,<br>
+            With All My Love 💖✨
+        </div>
+
+        <div class="navigation">
+            <a href="page2.html" class="nav-btn">💝 ← Back</a>
+            <a href="page4.html" class="nav-btn">Next → 💌</a>
+        </div>
+    </div>
+</body>
+</html>

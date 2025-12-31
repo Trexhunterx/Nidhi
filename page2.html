@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>📸 My Beautiful Butterfly 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Palatino', serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #1a1a2e);
+            background-size: 400% 400%;
+            animation: bgShift 15s ease infinite;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @keyframes bgShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3.5em;
+            margin-bottom: 60px;
+            background: linear-gradient(45deg, #ff6ec4, #7873f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(255, 110, 196, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(120, 115, 245, 0.8)); }
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .photo-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(255, 110, 196, 0.3);
+            transition: transform 0.5s ease;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .photo-card:hover {
+            transform: translateY(-15px) rotate(2deg) scale(1.02);
+        }
+
+        .photo-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 110, 196, 0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .photo-card:hover::after {
+            opacity: 1;
+            animation: shine 1.5s ease-in-out;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 30px 20px 20px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+
+        .nav-btn {
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(120, 115, 245, 0.4);
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 44px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; margin-bottom: 40px; }
+            .photo-grid { grid-template-columns: 1fr; gap: 20px; }
+            .photo-card img { height: 280px; }
+            .nav-btn { padding: 12px 25px; font-size: 1em; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2em; }
+            .photo-card img { height: 250px; }
+            .photo-caption { font-size: 1em; padding: 20px 15px 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <h1>🦋💫 My Beautiful Butterfly 💫🦋</h1>
+
+        <div class="photo-grid">
+            <div class="photo-card" style="animation-delay: 0.1s;">
+                <img src="her/38.jpeg" alt="Couple">
+                <div class="photo-caption">Every moment with you is precious 💕</div>
+            </div>
+
+            <div class="photo-card" style="animation-delay: 0.2s;">
+                <img src="her/67.jpeg" alt="Couple">
+                <div class="photo-caption">You make every day brighter ☀️</div>
+            </div>
+
+            <div class="photo-card" style="animation-delay: 0.3s;">
+                <img src="her/70.jpeg" alt="Couple">
+                <div class="photo-caption">Your Hug is my favorite place 🏡</div>
+            </div>
+
+            <div class="photo-card" style="animation-delay: 0.4s;">
+                <img src="her/68.jpeg" alt="Couple">
+                <div class="photo-caption">Your smile is my happiness 😊</div>
+            </div>
+
+            <div class="photo-card" style="animation-delay: 0.5s;">
+                <img src="her/99.jpeg" alt="Couple">
+                <div class="photo-caption">I Love U More than Anything 🌍</div>
+            </div>
+
+            <div class="photo-card" style="animation-delay: 0.6s;">
+                <img src="her/71.jpeg" alt="Couple">
+                <div class="photo-caption">Forever grateful for you 🌟</div>
+            </div>
+
+        </div>
+
+        <div class="navigation">
+            <a href="index.html" class="nav-btn">🎉 ← Back</a>
+            <a href="page3.html" class="nav-btn">Next → 💌</a>
+        </div>
+    </div>
+
+    <script>
+        // Create starry background
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#ff6b6b">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>✨ For My Nidhi 🎉❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4d96ff);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            will-change: background-position;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: firework 2s ease-out infinite;
+        }
+
+        @keyframes firework {
+            0% {
+                transform: translateY(0) scale(1) translateZ(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-500px) scale(0) translateZ(0);
+                opacity: 0;
+            }
+        }
+
+        .firework {
+            will-change: transform, opacity;
+        }
+
+        .container {
+            text-align: center;
+            color: white;
+            z-index: 10;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .year {
+            font-size: 6em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700, #ff69b4, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .message {
+            font-size: 1.5em;
+            margin: 30px 0;
+            line-height: 1.8;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .next-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8787);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 44px;
+        }
+
+        .next-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        }
+
+        .hearts {
+            position: absolute;
+            font-size: 2em;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(15deg); }
+        }
+
+        .floating-text {
+            position: absolute;
+            font-size: 1.5em;
+            opacity: 0.6;
+            animation: drift 8s ease-in-out infinite;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -20px) rotate(5deg); }
+            50% { transform: translate(-20px, 20px) rotate(-5deg); }
+            75% { transform: translate(20px, 20px) rotate(3deg); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .year { font-size: 4em; }
+            .message { font-size: 1.1em; padding: 0 20px; }
+            .container { padding: 30px 20px; }
+            .hearts { font-size: 1.5em; }
+            .floating-text { font-size: 1em; }
+            /* Hide some decorative elements on mobile */
+            .hearts:nth-child(n+6),
+            .floating-text:nth-child(n+3) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2em; }
+            .year { font-size: 3em; }
+            .message { font-size: 1em; }
+            .next-btn { padding: 12px 30px; font-size: 1em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" style="top: 10%; left: 10%;">❤️</div>
+    <div class="hearts" style="top: 20%; right: 15%; animation-delay: 2s;">💕</div>
+    <div class="hearts" style="bottom: 15%; left: 20%; animation-delay: 1s;">💖</div>
+    <div class="hearts" style="bottom: 25%; right: 10%; animation-delay: 3s;">💗</div>
+    <div class="hearts" style="top: 70%; left: 15%; animation-delay: 4s;">💝</div>
+    <div class="hearts" style="top: 15%; left: 85%; animation-delay: 2.5s;">💓</div>
+    <div class="hearts" style="bottom: 30%; right: 25%; animation-delay: 1.5s;">💞</div>
+    <div class="hearts" style="top: 80%; right: 20%; animation-delay: 3.5s;">🎉</div>
+    <div class="hearts" style="top: 5%; left: 50%; animation-delay: 0.5s;">🎊</div>
+    <div class="hearts" style="bottom: 10%; left: 40%; animation-delay: 2.8s;">🌟</div>
+    
+    <div class="floating-text" style="top: 30%; left: 5%; animation-delay: 1s;">💕 Love</div>
+    <div class="floating-text" style="top: 60%; right: 8%; animation-delay: 2s;">😊 Joy</div>
+    <div class="floating-text" style="bottom: 40%; left: 10%; animation-delay: 3s;">♾️ Forever</div>
+    <div class="floating-text" style="top: 50%; right: 5%; animation-delay: 4s;">👫 Together</div>
+    <div class="floating-text" style="top: 40%; left: 80%; animation-delay: 5s;">🎆 Cheers</div>
+    <div class="floating-text" style="bottom: 50%; right: 15%; animation-delay: 3.5s;">🥂 Celebrate</div>
+
+    <div class="container">
+        <h1>✨Happie New Year My CutiePie✨</h1>
+        <div class="year">🎊 2026 🎉</div>
+        <div class="message">
+            💝 To My Babygirllll 💝<br>
+            As we step into a new year together 🌟<br>
+            I want to celebrate every moment we've <br>
+            spent together & we'll spend in future🥂<br>
+            <!-- with every dream we'll chase together ❤️💕<br -->
+            Cheers to love, laughter, and endless dreams !!! 🎈✨
+        </div>
+        <a href="page2.html" class="next-btn"> Start Our Journey 💖 →</a>
+    </div>
+
+    <script>
+        // Create fireworks effect
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.left = Math.random() * 100 + '%';
+            firework.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            firework.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(firework);
+            
+            setTimeout(() => firework.remove(), 2000);
+        }
+
+        setInterval(createFirework, 300);
+    </script>
+</body>
+</html>

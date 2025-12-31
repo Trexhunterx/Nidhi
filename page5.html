@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#0f0c29">
+    <title>✨ My Wishes For Us 💖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Verdana', sans-serif;
+            background: #0f0c29;
+            background: linear-gradient(135deg, #24243e, #302b63, #0f0c29, #302b63, #24243e);
+            background-size: 400% 400%;
+            animation: gradientMove 20s ease infinite;
+            color: white;
+            min-height: 100vh;
+            padding: 50px 20px;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .floating-particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float-up 10s infinite;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Floating Stars */
+        .star {
+            position: fixed;
+            color: #ffd700;
+            font-size: 20px;
+            animation: twinkle 3s ease-in-out infinite, drift 8s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes drift {
+            0% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(30px) translateY(-30px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+
+        /* Floating Hearts */
+        .heart {
+            position: fixed;
+            color: #ff00de;
+            font-size: 24px;
+            animation: float-heart 15s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes float-heart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Sparkle Effect */
+        .sparkle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff, 0 0 20px #00d4ff;
+            animation: sparkle-anim 2s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes sparkle-anim {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Bubble Effect */
+        .bubble {
+            position: fixed;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), rgba(102, 126, 234, 0.2));
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.2);
+            animation: bubble-float 12s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes bubble-float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(-80px) translateX(40px);
+                opacity: 0.8;
+            }
+        }
+
+        .bubble:nth-child(2n) {
+            animation-duration: 15s;
+            animation-direction: reverse;
+        }
+
+        .bubble:nth-child(3n) {
+            animation-duration: 18s;
+        }
+
+        /* Mobile optimizations - reduce decorative elements */
+        @media (max-width: 768px) {
+            .star:nth-child(n+6), 
+            .heart:nth-child(n+4),
+            .sparkle:nth-child(n+6),
+            .bubble:nth-child(n+6) {
+                display: none;
+            }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3.5em;
+            margin-bottom: 60px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            animation: glow-text 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow-text {
+            from { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff00de; }
+            to { text-shadow: 0 0 20px #fff, 0 0 30px #ff00de, 0 0 40px #ff00de; }
+        }
+
+        .wishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .wish-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.5s ease;
+            animation: fadeIn 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .wish-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .wish-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 50px rgba(255, 0, 222, 0.3);
+        }
+
+        .wish-card:hover::before {
+            left: 100%;
+        }
+
+        .wish-icon {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .wish-title {
+            font-size: 1.5em;
+            text-align: center;
+            margin-bottom: 15px;
+            color: #ff00de;
+            font-weight: bold;
+        }
+
+        .wish-text {
+            text-align: center;
+            line-height: 1.8;
+            color: #ddd;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+        }
+
+        .nav-btn {
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(118, 75, 162, 0.4);
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 44px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(118, 75, 162, 0.6);
+        }
+
+        .wish-card:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes ripple {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 222, 0.6); }
+            100% { box-shadow: 0 0 0 30px rgba(255, 0, 222, 0); }
+        }
+
+        .wish-card:hover .wish-icon {
+            animation: bounce 0.6s infinite, ripple 1.5s infinite;
+        }
+
+        @media (max-width: 968px) {
+            h1 { font-size: 3em; }
+            .wishes-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; margin-bottom: 40px; }
+            .wishes-grid { grid-template-columns: 1fr; gap: 20px; }
+            .wish-card { padding: 30px; }
+            .wish-icon { font-size: 2.5em; }
+            .wish-title { font-size: 1.3em; }
+            .nav-btn { padding: 12px 25px; font-size: 1em; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2em; }
+            .wish-card { padding: 25px; }
+            .wish-icon { font-size: 2em; }
+            .wish-title { font-size: 1.2em; }
+            .wish-text { font-size: 0.95em; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Stars -->
+    <div class="star" style="top: 10%; left: 5%; animation-delay: 0s;">⭐</div>
+    <div class="star" style="top: 20%; left: 15%; animation-delay: 1s;">✨</div>
+    <div class="star" style="top: 15%; left: 85%; animation-delay: 2s;">⭐</div>
+    <div class="star" style="top: 30%; left: 70%; animation-delay: 1.5s;">✨</div>
+    <div class="star" style="top: 50%; left: 10%; animation-delay: 0.5s;">⭐</div>
+    <div class="star" style="top: 60%; left: 90%; animation-delay: 2.5s;">✨</div>
+    <div class="star" style="top: 75%; left: 25%; animation-delay: 1.2s;">⭐</div>
+    <div class="star" style="top: 85%; left: 60%; animation-delay: 0.8s;">✨</div>
+    <div class="star" style="top: 40%; left: 45%; animation-delay: 1.8s;">⭐</div>
+    <div class="star" style="top: 70%; left: 80%; animation-delay: 2.2s;">✨</div>
+
+    <!-- Floating Hearts -->
+    <div class="heart" style="left: 8%; animation-delay: 0s;">💕</div>
+    <div class="heart" style="left: 22%; animation-delay: 3s;">💖</div>
+    <div class="heart" style="left: 38%; animation-delay: 6s;">💕</div>
+    <div class="heart" style="left: 55%; animation-delay: 2s;">💖</div>
+    <div class="heart" style="left: 72%; animation-delay: 8s;">💕</div>
+    <div class="heart" style="left: 88%; animation-delay: 4s;">💖</div>
+
+    <!-- Sparkles -->
+    <div class="sparkle" style="top: 12%; left: 30%; animation-delay: 0s;"></div>
+    <div class="sparkle" style="top: 25%; left: 50%; animation-delay: 0.5s;"></div>
+    <div class="sparkle" style="top: 35%; left: 20%; animation-delay: 1s;"></div>
+    <div class="sparkle" style="top: 45%; left: 75%; animation-delay: 1.5s;"></div>
+    <div class="sparkle" style="top: 55%; left: 35%; animation-delay: 0.3s;"></div>
+    <div class="sparkle" style="top: 65%; left: 65%; animation-delay: 0.8s;"></div>
+    <div class="sparkle" style="top: 78%; left: 15%; animation-delay: 1.2s;"></div>
+    <div class="sparkle" style="top: 88%; left: 85%; animation-delay: 0.6s;"></div>
+    <div class="sparkle" style="top: 18%; left: 65%; animation-delay: 1.8s;"></div>
+    <div class="sparkle" style="top: 42%; left: 92%; animation-delay: 0.4s;"></div>
+
+    <!-- Bubbles -->
+    <div class="bubble" style="width: 40px; height: 40px; top: 15%; left: 12%; animation-delay: 0s;"></div>
+    <div class="bubble" style="width: 30px; height: 30px; top: 28%; left: 35%; animation-delay: 2s;"></div>
+    <div class="bubble" style="width: 50px; height: 50px; top: 45%; left: 18%; animation-delay: 4s;"></div>
+    <div class="bubble" style="width: 35px; height: 35px; top: 60%; left: 50%; animation-delay: 1s;"></div>
+    <div class="bubble" style="width: 45px; height: 45px; top: 72%; left: 70%; animation-delay: 3s;"></div>
+    <div class="bubble" style="width: 32px; height: 32px; top: 82%; left: 40%; animation-delay: 5s;"></div>
+    <div class="bubble" style="width: 38px; height: 38px; top: 22%; left: 78%; animation-delay: 1.5s;"></div>
+    <div class="bubble" style="width: 42px; height: 42px; top: 38%; left: 88%; animation-delay: 3.5s;"></div>
+    <div class="bubble" style="width: 36px; height: 36px; top: 52%; left: 5%; animation-delay: 2.5s;"></div>
+    <div class="bubble" style="width: 48px; height: 48px; top: 68%; left: 92%; animation-delay: 4.5s;"></div>
+
+    <div class="floating-particles" id="particles"></div>
+
+    <div class="container">
+        <h1>🌟 My Wishes For Us In 2026 🌟</h1>
+
+        <div class="wishes-grid">
+            <div class="wish-card" style="animation-delay: 0.1s;">
+                <div class="wish-icon">💖</div>
+                <div class="wish-title">Endless Love</div>
+                <div class="wish-text">
+                    May our love continue to grow deeper and stronger with each passing day, filling our hearts with joy and warmth.
+                </div>
+            </div>
+
+            <div class="wish-card" style="animation-delay: 0.2s;">
+                <div class="wish-icon">🚗</div>
+
+                <div class="wish-title">New Adventures</div>
+                <div class="wish-text">
+                    Let's explore new places, try new things, and create unforgettable memories together this year.
+                </div>
+            </div>
+
+            <div class="wish-card" style="animation-delay: 0.3s;">
+                <div class="wish-icon">😊</div>
+                <div class="wish-title">Happiness Always</div>
+                <div class="wish-text">
+                    I wish for your smile to never fade and for laughter to fill every moment we share together.
+                </div>
+            </div>
+
+            <div class="wish-card" style="animation-delay: 0.4s;">
+                <div class="wish-icon">🎯</div>
+                <div class="wish-title">Dreams Come True</div>
+                <div class="wish-text">
+                    May all your dreams and goals for this year manifest into beautiful reality. I'll be by your side at every step.
+                </div>
+            </div>
+
+            <div class="wish-card" style="animation-delay: 0.5s;">
+                <div class="wish-icon">💪</div>
+                <div class="wish-title">Strength Together</div>
+                <div class="wish-text">
+                    Through every challenge, may we grow stronger as partners, supporting and uplifting each other.
+                </div>
+            </div>
+
+            <div class="wish-card" style="animation-delay: 0.6s;">
+                <div class="wish-icon">✨</div>
+                <div class="wish-title">Magic Moments</div>
+                <div class="wish-text">
+                    May 2026 be filled with countless magical moments, both big and small, that we'll cherish forever.
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <a href="page4.html" class="nav-btn">← Back</a>
+            <a href="page6.html" class="nav-btn">Next →</a>
+        </div>
+    </div>
+
+    <script>
+        // Optimize particle creation for low-end devices
+        const particlesContainer = document.getElementById('particles');
+        const colors = ['#ff00de', '#00d4ff', '#00ff88', '#ffd700'];
+        const isMobile = window.innerWidth < 768;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        // Reduce particle count on mobile and low-end devices
+        const particleInterval = isMobile ? 1000 : 500;
+        const maxParticles = isMobile ? 15 : 30;
+        let particleCount = 0;
+        
+        function createParticle() {
+            if (prefersReducedMotion || particleCount >= maxParticles) return;
+            
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.width = particle.style.height = Math.random() * 10 + 5 + 'px';
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+            particlesContainer.appendChild(particle);
+            particleCount++;
+            
+            setTimeout(() => {
+                particle.remove();
+                particleCount--;
+            }, 20000);
+        }
+
+        if (!prefersReducedMotion) {
+            setInterval(createParticle, particleInterval);
+        }
+    </script>
+</body>
+</html>

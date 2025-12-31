@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#667eea">
+    <title>📷 Our Photo Gallery 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+            background-size: 400% 400%;
+            animation: gradientSlide 15s ease infinite;
+            min-height: 100vh;
+            padding: 50px 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @keyframes gradientSlide {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3.5em;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            animation: slideDown 1s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.3em;
+            color: #f0f0f0;
+            margin-bottom: 60px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: zoomIn 0.8s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .card-swiper {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            cursor: grab;
+        }
+
+        .card-swiper:active {
+            cursor: grabbing;
+        }
+
+        .card-images {
+            display: flex;
+            height: 100%;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        .card-image {
+            min-width: 100%;
+            height: 100%;
+            object-fit: cover;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .card-caption {
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #764ba2;
+        }
+
+        .swipe-indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: white;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        .swipe-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            pointer-events: none;
+        }
+
+        .arrow {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            pointer-events: all;
+            font-size: 1.5em;
+            color: #764ba2;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .arrow:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+
+        .nav-btn {
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(118, 75, 162, 0.4);
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 44px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        @media (max-width: 1200px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 968px) {
+            h1 { font-size: 2.8em; }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .subtitle { font-size: 1.1em; }
+            .card-swiper { height: 250px; }
+            .card-caption { font-size: 1em; padding: 15px; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2em; }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .card-swiper { height: 300px; }
+            .nav-btn { padding: 12px 25px; font-size: 1em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📸 Everthing of Mine 📸</h1>
+        <div class="subtitle">Swipe through memories ❤️</div>
+
+        <div class="gallery-grid">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-swiper" data-card="0">
+                    <div class="card-images">
+                        <img src="her/30.jpeg" alt="Memory 1-1" class="card-image">
+                        <img src="her/31.jpeg" alt="Memory 1-2" class="card-image">
+                        <img src="her/75.jpeg" alt="Memory 1-3" class="card-image">
+                    </div>
+                    <div class="swipe-arrows">
+                        <div class="arrow arrow-left">‹</div>
+                        <div class="arrow arrow-right">›</div>
+                    </div>
+                    <div class="swipe-indicators">
+                        <div class="indicator active"></div>
+                        <div class="indicator"></div>
+                        <div class="indicator"></div>
+                    </div>
+                </div>
+                <div class="card-caption">Forever 💕</div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-swiper" data-card="1">
+                    <div class="card-images">
+                        <img src="her/64.jpeg" alt="Memory 2-1" class="card-image">
+                        <img src="her/52.jpeg" alt="Memory 2-2" class="card-image">
+                        <img src="her/34.jpeg" alt="Memory 2-3" class="card-image">
+                    </div>
+                    <div class="swipe-arrows">
+                        <div class="arrow arrow-left">‹</div>
+                        <div class="arrow arrow-right">›</div>
+                    </div>
+                    <div class="swipe-indicators">
+                        <div class="indicator active"></div>
+                        <div class="indicator"></div>
+                        <div class="indicator"></div>
+                    </div>
+                </div>
+                <div class="card-caption">Pure Happiness 😊</div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-swiper" data-card="2">
+                    <div class="card-images">
+                        <img src="her/23.jpeg" alt="Memory 3-1" class="card-image">
+                        <img src="her/25.jpeg" alt="Memory 3-2" class="card-image">
+                        <img src="her/25.jpeg" alt="Memory 3-3" class="card-image">
+                    </div>
+                    <div class="swipe-arrows">
+                        <div class="arrow arrow-left">‹</div>
+                        <div class="arrow arrow-right">›</div>
+                    </div>
+                    <div class="swipe-indicators">
+                        <div class="indicator active"></div>
+                        <div class="indicator"></div>
+                        <div class="indicator"></div>
+                    </div>
+                </div>
+                <div class="card-caption">You are my world 🌍</div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="card">
+                <div class="card-swiper" data-card="3">
+                    <div class="card-images">
+                        <img src="her/62.jpeg" alt="Memory 4-1" class="card-image">
+                        <img src="her/63.jpeg" alt="Memory 4-2" class="card-image">
+                        <img src="her/72.jpeg" alt="Memory 4-3" class="card-image">
+                    </div>
+                    <div class="swipe-arrows">
+                        <div class="arrow arrow-left">‹</div>
+                        <div class="arrow arrow-right">›</div>
+                    </div>
+                    <div class="swipe-indicators">
+                        <div class="indicator active"></div>
+                        <div class="indicator"></div>
+                        <div class="indicator"></div>
+                    </div>
+                </div>
+                <div class="card-caption">Love in Every Moment ❤️</div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="card">
+                <div class="card-swiper" data-card="4">
+                    <div class="card-images">
+                        <img src="her/3.jpeg" alt="Memory 5-1" class="card-image">
+                        <img src="her/1.jpeg" alt="Memory 5-2" class="card-image">
+                        <img src="her/5.jpeg" alt="Memory 5-3" class="card-image">
+                    </div>
+                    <div class="swipe-arrows">
+                        <div class="arrow arrow-left">‹</div>
+                        <div class="arrow arrow-right">›</div>
+                    </div>
+                    <div class="swipe-indicators">
+                        <div class="indicator active"></div>
+                        <div class="indicator"></div>
+                        <div class="indicator"></div>
+                    </div>
+                </div>
+                <div class="card-caption">My Nidhu 🎉</div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="card">
+                <div class="card-swiper" data-card="5">
+                    <div class="card-images">
+                        <img src="her/32.jpeg" alt="Memory 6-1" class="card-image">
+                        <img src="her/35.jpeg" alt="Memory 6-2" class="card-image">
+                        <img src="her/27.jpeg" alt="Memory 6-3" class="card-image">
+                    </div>
+                    <div class="swipe-arrows">
+                        <div class="arrow arrow-left">‹</div>
+                        <div class="arrow arrow-right">›</div>
+                    </div>
+                    <div class="swipe-indicators">
+                        <div class="indicator active"></div>
+                        <div class="indicator"></div>
+                        <div class="indicator"></div>
+                    </div>
+                </div>
+                <div class="card-caption">My Precious Gem 💖</div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="card">
+                <div class="card-swiper" data-card="6">
+                    <div class="card-images">
+                        <img src="her/76.jpeg" alt="Memory 7-1" class="card-image">
+                        <img src="her/77.jpeg" alt="Memory 7-2" class="card-image">
+                        <img src="her/78.jpeg" alt="Memory 7-3" class="card-image">
+                    </div>
+                    <div class="swipe-arrows">
+                        <div class="arrow arrow-left">‹</div>
+                        <div class="arrow arrow-right">›</div>
+                    </div>
+                    <div class="swipe-indicators">
+                        <div class="indicator active"></div>
+                        <div class="indicator"></div>
+                        <div class="indicator"></div>
+                    </div>
+                </div>
+                <div class="card-caption">Travel Together 🌅</div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="card">
+                <div class="card-swiper" data-card="7">
+                    <div class="card-images">
+                        <img src="her/60.jpeg" alt="Memory 8-1" class="card-image">
+                        <img src="her/57.jpeg" alt="Memory 8-2" class="card-image">
+                        <img src="her/58.jpeg" alt="Memory 8-3" class="card-image">
+                    </div>
+                    <div class="swipe-arrows">
+                        <div class="arrow arrow-left">‹</div>
+                        <div class="arrow arrow-right">›</div>
+                    </div>
+                    <div class="swipe-indicators">
+                        <div class="indicator active"></div>
+                        <div class="indicator"></div>
+                        <div class="indicator"></div>
+                    </div>
+                </div>
+                <div class="card-caption">Beautiful Us 💫</div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <a href="page5.html" class="nav-btn">← Back</a>
+            <a href="page7.html" class="nav-btn">Final Page →</a>
+        </div>
+    </div>
+
+    <script>
+        // Initialize all card swipers
+        const swipers = document.querySelectorAll('.card-swiper');
+        
+        swipers.forEach((swiper, cardIndex) => {
+            const images = swiper.querySelector('.card-images');
+            const indicators = swiper.querySelectorAll('.indicator');
+            const leftArrow = swiper.querySelector('.arrow-left');
+            const rightArrow = swiper.querySelector('.arrow-right');
+            
+            let currentIndex = 0;
+            const totalImages = 3;
+            
+            // Touch/swipe support
+            let startX = 0;
+            let isDragging = false;
+            
+            function updateSlide() {
+                images.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Update indicators
+                indicators.forEach((indicator, index) => {
+                    if (index === currentIndex) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+            
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % totalImages;
+                updateSlide();
+            }
+            
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+                updateSlide();
+            }
+            
+            // Arrow click handlers
+            leftArrow.addEventListener('click', prevSlide);
+            rightArrow.addEventListener('click', nextSlide);
+            
+            // Indicator click handlers
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlide();
+                });
+            });
+            
+            // Touch/Mouse swipe handlers
+            let currentTranslate = 0;
+            let prevTranslate = 0;
+            
+            swiper.addEventListener('mousedown', startDrag);
+            swiper.addEventListener('touchstart', startDrag);
+            
+            swiper.addEventListener('mousemove', drag);
+            swiper.addEventListener('touchmove', drag);
+            
+            swiper.addEventListener('mouseup', endDrag);
+            swiper.addEventListener('touchend', endDrag);
+            swiper.addEventListener('mouseleave', endDrag);
+            
+            function startDrag(e) {
+                isDragging = true;
+                startX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+                images.style.transition = 'none';
+                prevTranslate = -currentIndex * swiper.offsetWidth;
+                swiper.style.cursor = 'grabbing';
+            }
+            
+            function drag(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                
+                const currentX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+                const diff = currentX - startX;
+                currentTranslate = prevTranslate + diff;
+                
+                // Smooth visual feedback - show the card sliding
+                const maxTranslate = -(totalImages - 1) * swiper.offsetWidth;
+                const minTranslate = 0;
+                
+                // Allow slight overscroll for elastic effect at boundaries
+                if (currentTranslate > minTranslate) {
+                    currentTranslate = minTranslate + (currentTranslate - minTranslate) * 0.3;
+                } else if (currentTranslate < maxTranslate) {
+                    currentTranslate = maxTranslate + (currentTranslate - maxTranslate) * 0.3;
+                }
+                
+                images.style.transform = `translateX(${currentTranslate}px)`;
+            }
+            
+            function endDrag(e) {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                swiper.style.cursor = 'grab';
+                images.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                
+                const movedBy = currentTranslate - prevTranslate;
+                
+                // Swipe threshold - 25% of card width for easier swiping
+                const threshold = swiper.offsetWidth * 0.25;
+                
+                if (movedBy < -threshold && currentIndex < totalImages - 1) {
+                    nextSlide();
+                } else if (movedBy > threshold && currentIndex > 0) {
+                    prevSlide();
+                } else {
+                    // Snap back to current position with smooth animation
+                    updateSlide();
+                }
+            }
+            
+            // Auto-play (optional - remove if you don't want auto-swipe)
+            // setInterval(nextSlide, 5000);
+        });
+    </script>
+</body>
+</html>

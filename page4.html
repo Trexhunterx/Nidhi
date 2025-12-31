@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>✨ Our Love Story Timeline 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460, #533483, #1a1a2e);
+            background-size: 400% 400%;
+            animation: gradientShift 25s ease infinite;
+            color: white;
+            min-height: 100vh;
+            padding: 50px 20px;
+            position: relative;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3.5em;
+            margin-bottom: 80px;
+            background: linear-gradient(45deg, #ff1493, #00ffff, #3854f1, #f23636, #f97ec0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titlePulse 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(245, 87, 108, 0.5);
+        }
+
+        @keyframes titlePulse {
+            0%, 100% {
+                filter: brightness(1) drop-shadow(0 0 10px rgba(245, 87, 108, 0.5));
+            }
+            50% {
+                filter: brightness(1.2) drop-shadow(0 0 20px rgba(245, 87, 108, 0.8));
+            }
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #8b4789, #4a7c7e, #b8860b);
+            box-shadow: 0 0 20px rgba(139, 71, 137, 0.5);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 80px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3),
+                        0 0 0 1px rgba(240, 147, 251, 0.2);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 50px rgba(245, 87, 108, 0.5),
+                        0 0 30px rgba(240, 147, 251, 0.4);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 60px;
+            height: 60px;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #8b4789, #4a7c7e);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8em;
+            border: 5px solid #232526;
+            z-index: 10;
+            animation: iconPulse 2s infinite;
+            box-shadow: 0 0 20px rgba(245, 87, 108, 0.6);
+        }
+
+        @keyframes iconPulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(245, 87, 108, 0.6),
+                           0 0 0 0 rgba(245, 87, 108, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(245, 87, 108, 0.8),
+                           0 0 0 20px rgba(245, 87, 108, 0);
+                transform: translateX(-50%) scale(1.1);
+            }
+        }
+
+        .timeline-date {
+            font-size: 1.1em;
+            color: #6a9c9e;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(245, 87, 108, 0.5);
+        }
+
+        .timeline-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .timeline-description {
+            line-height: 1.6;
+            color: #ddd;
+        }
+
+        .timeline-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 80px;
+        }
+
+        .nav-btn {
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #8b4789, #b8860b);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 20px rgba(245, 87, 108, 0.4);
+            border: 2px solid transparent;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 44px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.6);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .timeline-item:hover .timeline-content {
+            transform: scale(1.05) translateX(10px);
+        }
+
+        .timeline-item:nth-child(even):hover .timeline-content {
+            transform: scale(1.05) translateX(-10px);
+        }
+
+        .timeline-image:hover {
+            transform: scale(1.1);
+            transition: transform 0.5s ease;
+        }
+
+        /* Bubbly Dots */
+        .bubble {
+            position: fixed;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(139, 71, 137, 0.4), rgba(74, 124, 126, 0.2));
+            box-shadow: 0 0 10px rgba(139, 71, 137, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.1);
+            animation: float 15s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.4;
+            }
+            50% {
+                transform: translateY(-100px) translateX(50px);
+                opacity: 0.7;
+            }
+        }
+
+        .bubble:nth-child(2n) {
+            animation-duration: 18s;
+            animation-direction: reverse;
+        }
+
+        .bubble:nth-child(3n) {
+            animation-duration: 22s;
+        }
+
+        .bubble:nth-child(4n) {
+            background: radial-gradient(circle at 30% 30%, rgba(184, 134, 11, 0.3), rgba(139, 71, 137, 0.2));
+        }
+
+        @media (max-width: 968px) {
+            h1 { font-size: 2.8em; margin-bottom: 60px; }
+            .timeline-content { width: 48%; padding: 25px; }
+            .timeline-title { font-size: 1.3em; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.3em; margin-bottom: 50px; }
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-icon {
+                left: 30px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
+            }
+
+            .timeline-content {
+                width: calc(100% - 100px);
+                margin-left: auto !important;
+                padding: 20px;
+            }
+
+            .timeline-title { font-size: 1.2em; }
+            .timeline-image { height: 250px; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8em; }
+            .timeline-content { width: calc(100% - 80px); padding: 15px; }
+            .timeline-icon { width: 40px; height: 40px; font-size: 1.2em; left: 20px; }
+            .timeline::before { left: 20px; }
+            .timeline-title { font-size: 1.1em; }
+            .timeline-description { font-size: 0.9em; }
+            .nav-btn { padding: 12px 25px; font-size: 1em; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Bubbly Dots -->
+    <div class="bubble" style="width: 20px; height: 20px; top: 10%; left: 5%; animation-delay: 0s;"></div>
+    <div class="bubble" style="width: 15px; height: 15px; top: 20%; left: 15%; animation-delay: 2s;"></div>
+    <div class="bubble" style="width: 25px; height: 25px; top: 15%; left: 25%; animation-delay: 4s;"></div>
+    <div class="bubble" style="width: 18px; height: 18px; top: 30%; left: 35%; animation-delay: 1s;"></div>
+    <div class="bubble" style="width: 22px; height: 22px; top: 40%; left: 45%; animation-delay: 5s;"></div>
+    <div class="bubble" style="width: 16px; height: 16px; top: 50%; left: 55%; animation-delay: 3s;"></div>
+    <div class="bubble" style="width: 20px; height: 20px; top: 60%; left: 65%; animation-delay: 6s;"></div>
+    <div class="bubble" style="width: 24px; height: 24px; top: 70%; left: 75%; animation-delay: 2.5s;"></div>
+    <div class="bubble" style="width: 14px; height: 14px; top: 80%; left: 85%; animation-delay: 4.5s;"></div>
+    <div class="bubble" style="width: 19px; height: 19px; top: 90%; left: 95%; animation-delay: 1.5s;"></div>
+    <div class="bubble" style="width: 17px; height: 17px; top: 25%; right: 10%; animation-delay: 3.5s;"></div>
+    <div class="bubble" style="width: 21px; height: 21px; top: 45%; right: 20%; animation-delay: 5.5s;"></div>
+    <div class="bubble" style="width: 23px; height: 23px; top: 65%; right: 15%; animation-delay: 1.2s;"></div>
+    <div class="bubble" style="width: 15px; height: 15px; top: 85%; right: 25%; animation-delay: 3.8s;"></div>
+    <div class="bubble" style="width: 20px; height: 20px; top: 35%; right: 5%; animation-delay: 2.2s;"></div>
+    <div class="bubble" style="width: 18px; height: 18px; top: 5%; left: 10%; animation-delay: 0.8s;"></div>
+    <div class="bubble" style="width: 16px; height: 16px; top: 12%; left: 40%; animation-delay: 4.2s;"></div>
+    <div class="bubble" style="width: 22px; height: 22px; top: 28%; left: 60%; animation-delay: 3.3s;"></div>
+    <div class="bubble" style="width: 14px; height: 14px; top: 42%; left: 8%; animation-delay: 5.8s;"></div>
+    <div class="bubble" style="width: 21px; height: 21px; top: 55%; left: 22%; animation-delay: 1.8s;"></div>
+    <div class="bubble" style="width: 19px; height: 19px; top: 68%; left: 48%; animation-delay: 6.5s;"></div>
+    <div class="bubble" style="width: 17px; height: 17px; top: 75%; left: 12%; animation-delay: 2.8s;"></div>
+    <div class="bubble" style="width: 23px; height: 23px; top: 88%; left: 30%; animation-delay: 4.8s;"></div>
+    <div class="bubble" style="width: 15px; height: 15px; top: 18%; right: 8%; animation-delay: 1.3s;"></div>
+    <div class="bubble" style="width: 20px; height: 20px; top: 32%; right: 28%; animation-delay: 3.9s;"></div>
+    <div class="bubble" style="width: 24px; height: 24px; top: 48%; right: 12%; animation-delay: 5.2s;"></div>
+    <div class="bubble" style="width: 16px; height: 16px; top: 58%; right: 35%; animation-delay: 0.6s;"></div>
+    <div class="bubble" style="width: 18px; height: 18px; top: 72%; right: 8%; animation-delay: 4.3s;"></div>
+    <div class="bubble" style="width: 22px; height: 22px; top: 82%; right: 18%; animation-delay: 2.1s;"></div>
+    <div class="bubble" style="width: 19px; height: 19px; top: 95%; right: 30%; animation-delay: 6.2s;"></div>
+    <div class="bubble" style="width: 21px; height: 21px; top: 8%; left: 50%; animation-delay: 3.6s;"></div>
+    <div class="bubble" style="width: 17px; height: 17px; top: 38%; left: 70%; animation-delay: 1.9s;"></div>
+    <div class="bubble" style="width: 23px; height: 23px; top: 52%; left: 90%; animation-delay: 5.4s;"></div>
+    <div class="bubble" style="width: 15px; height: 15px; top: 78%; left: 58%; animation-delay: 2.7s;"></div>
+
+    <!-- Floating Particles -->
+    <div class="floating-particle" style="left: 5%; animation-delay: 0s;"></div>
+    <div class="floating-particle" style="left: 15%; animation-delay: 2s;"></div>
+    <div class="floating-particle" style="left: 25%; animation-delay: 4s;"></div>
+    <div class="floating-particle" style="left: 35%; animation-delay: 1s;"></div>
+    <div class="floating-particle" style="left: 45%; animation-delay: 5s;"></div>
+    <div class="floating-particle" style="left: 55%; animation-delay: 3s;"></div>
+    <div class="floating-particle" style="left: 65%; animation-delay: 6s;"></div>
+    <div class="floating-particle" style="left: 75%; animation-delay: 2.5s;"></div>
+    <div class="floating-particle" style="left: 85%; animation-delay: 4.5s;"></div>
+    <div class="floating-particle" style="left: 95%; animation-delay: 1.5s;"></div>
+    
+    <!-- Sparkles -->
+    <div class="sparkle-effect" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+    <div class="sparkle-effect" style="top: 20%; right: 15%; animation-delay: 1s;"></div>
+    <div class="sparkle-effect" style="top: 50%; left: 20%; animation-delay: 2s;"></div>
+    <div class="sparkle-effect" style="bottom: 30%; right: 10%; animation-delay: 1.5s;"></div>
+    <div class="sparkle-effect" style="bottom: 10%; left: 30%; animation-delay: 2.5s;"></div>
+    <div class="sparkle-effect" style="top: 70%; right: 25%; animation-delay: 0.5s;"></div>
+
+    <div class="container">
+        <h1>✨💕 Our Love Story 💕✨</h1>
+
+        <div class="timeline">
+            <div class="timeline-item" style="animation-delay: 0.2s;">
+                <div class="timeline-icon">💫</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">The Beginning</div>
+                    <div class="timeline-title">Our first VC </div>
+                    <div class="timeline-description">
+                        That magical moment when our eyes first met and I knew my life would never be the same.
+                    </div>
+                    <img src="her/80.jpeg" alt="First Meeting" class="timeline-image">
+                </div>
+            </div>
+
+            <div class="timeline-item" style="animation-delay: 0.4s;">
+                <div class="timeline-icon">💕</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">First Date</div>
+                    <div class="timeline-title">Our First Meet</div>
+                    <div class="timeline-description">
+                        The day that started it all. Nervous laughter, endless conversations, and the beginning of forever.
+                    </div>
+                    <img src="her/81.jpeg" alt="First Date" class="timeline-image">
+                </div>
+            </div>
+
+            <div class="timeline-item" style="animation-delay: 0.4s;">
+                <div class="timeline-icon">💕</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Second Date</div>
+                    <div class="timeline-title">Our Second Date</div>
+                    <div class="timeline-description">
+                        As time passed i have fallen harder and harder for you Nidhi !</div>
+                    <img src="her/82.jpeg" alt="First Date" class="timeline-image">
+                </div>
+            </div>
+
+            <div class="timeline-item" style="animation-delay: 0.6s;">
+                <div class="timeline-icon">🌟</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Special Moments</div>
+                    <div class="timeline-title">Third One</div>
+                    <div class="timeline-description">
+                        Every laugh, every adventure, every quiet moment together has built the beautiful story we share.
+                    </div>
+                    <img src="her/83.jpeg" alt="Memories" class="timeline-image">
+                </div>
+            </div>
+
+            <div class="timeline-item" style="animation-delay: 0.8s;">
+                <div class="timeline-icon">❤️</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Today</div>
+                    <div class="timeline-title">Stronger Than Ever</div>
+                    <div class="timeline-description">
+                        Here we are, ready to embrace a new year together, with love that keeps growing stronger.
+                    </div>
+                    <img src="her/84.jpeg" alt="Today" class="timeline-image">
+                </div>
+            </div>
+
+            <div class="timeline-item" style="animation-delay: 1s;">
+                <div class="timeline-icon">🚀</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2026 & Beyond</div>
+                    <div class="timeline-title">Imagining Our Future Together</div>
+                    <div class="timeline-description">
+                        The best is yet to come. Let's make 2026 more memorable !
+                    </div>
+                    <img src="her/85.jpeg" alt="Future" class="timeline-image">
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <a href="page3.html" class="nav-btn">💌 ← Back</a>
+            <a href="page5.html" class="nav-btn">Next → 🌟</a>
+        </div>
+    </div>
+</body>
+</html>
